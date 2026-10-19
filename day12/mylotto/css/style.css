@@ -1,0 +1,365 @@
+:root {
+  --pink: #D4537E;
+  --pink-dark: #993556;
+  --pink-deep: #72243E;
+  --pink-light: #FBEAF0;
+  --pink-border: #ED93B1;
+
+  --purple: #534AB7;
+  --purple-deep: #3C3489;
+  --purple-light: #EEEDFE;
+  --purple-border: #AFA9EC;
+
+  --mint: #1D9E75;
+  --mint-deep: #085041;
+  --mint-light: #E1F5EE;
+  --mint-border: #5DCAA5;
+
+  --danger: #A32D2D;
+  --bg: #F7F5F2;
+  --card: #FFFFFF;
+  --cell: #F1EFE8;
+  --text: #2C2C2A;
+  --text-sub: #6B6A65;
+  --text-muted: #9A988F;
+  --line: #E4E1D8;
+
+  --ball-size: 36px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Gowun Dodum", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+}
+
+.app {
+  max-width: 720px;
+}
+
+/* ① 헤더 */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--pink-light);
+  color: var(--pink-dark);
+  font-size: 26px;
+  animation: wiggle 2.4s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(-12deg); }
+  20% { transform: rotate(10deg); }
+  30% { transform: rotate(0deg); }
+}
+
+.title {
+  font-family: "Jua", sans-serif;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--text-sub);
+  margin: 4px 0 0;
+}
+
+/* ② 분할 번호판 */
+.pane {
+  height: 100%;
+  background: var(--card);
+  border-radius: 18px;
+  padding: 14px;
+  border: 1.5px dashed;
+}
+
+.pane-fixed { border-color: var(--pink-border); }
+.pane-excluded { border-color: var(--purple-border); }
+
+.pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pane-title {
+  font-family: "Jua", sans-serif;
+  font-size: 1.1rem;
+}
+
+.pane-fixed .pane-title { color: var(--pink-dark); }
+.pane-excluded .pane-title { color: var(--purple); }
+
+.badge-count {
+  font-size: 0.8rem;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.pane-fixed .badge-count { background: var(--pink-light); color: var(--pink-deep); }
+.pane-excluded .badge-count { background: var(--purple-light); color: var(--purple-deep); }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  width: 100%;
+  border: none;
+  border-radius: 50%;
+  background: var(--cell);
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.cell:hover:not(:disabled) {
+  transform: scale(1.12);
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--text-sub);
+  outline-offset: 2px;
+}
+
+.board[data-type="fixed"] .cell[aria-pressed="true"] {
+  background: var(--pink);
+  color: #fff;
+}
+
+.board[data-type="excluded"] .cell[aria-pressed="true"] {
+  background: var(--purple);
+  color: #fff;
+  text-decoration: line-through;
+}
+
+.cell:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ③ 액션 버튼 */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-pill {
+  border-radius: 999px;
+  padding: 0 18px;
+  white-space: nowrap;
+}
+
+.btn-soft {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--text-sub);
+}
+
+.btn-soft:hover {
+  background: var(--cell);
+  color: var(--text);
+}
+
+.btn-main {
+  height: 50px;
+  background: var(--pink);
+  border: none;
+  color: #fff;
+  font-family: "Jua", sans-serif;
+  font-size: 1.15rem;
+}
+
+.btn-main:hover,
+.btn-main:focus-visible {
+  background: var(--pink-dark);
+  color: #fff;
+}
+
+.btn-main:active {
+  transform: scale(0.98);
+}
+
+/* ④ 결과 카드 */
+.result-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 14px 16px;
+}
+
+.result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+}
+
+.result-title {
+  font-family: "Jua", sans-serif;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.btn-clear {
+  height: 32px;
+  font-size: 0.8rem;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--danger);
+}
+
+.btn-clear:hover {
+  background: #FCEBEB;
+  color: var(--danger);
+}
+
+.empty {
+  text-align: center;
+  padding: 28px 0 18px;
+  color: var(--text-muted);
+}
+
+.empty i {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.set-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.set-row + .set-row {
+  border-top: 1px dashed var(--line);
+}
+
+.set-label {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cell);
+  color: var(--text-sub);
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ball {
+  flex-shrink: 0;
+  width: var(--ball-size);
+  height: var(--ball-size);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  animation: pop 0.3s ease both;
+}
+
+.ball.is-fixed {
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--pink);
+}
+
+.ball-y { background: #FAC775; color: #633806; }
+.ball-b { background: #B5D4F4; color: #0C447C; }
+.ball-p { background: #F4C0D1; color: #72243E; }
+.ball-l { background: #CECBF6; color: #3C3489; }
+.ball-m { background: #9FE1CB; color: #085041; }
+
+@keyframes pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  70% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.btn-copy {
+  margin-left: auto;
+  flex-shrink: 0;
+  height: 30px;
+  font-size: 0.75rem;
+  padding: 0 12px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text-sub);
+}
+
+.btn-copy:hover {
+  background: var(--cell);
+}
+
+.btn-copy.is-done,
+.btn-copy.is-done:hover {
+  background: var(--mint-light);
+  border-color: var(--mint-border);
+  color: var(--mint-deep);
+}
+
+/* 토스트 */
+.cute-toast {
+  border: none;
+  border-radius: 999px;
+  background: var(--text);
+  color: #fff;
+  width: auto;
+}
+
+.cute-toast .toast-body {
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+/* 반응형 */
+@media (max-width: 767.98px) {
+  :root {
+    --ball-size: 30px;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .set-row {
+    gap: 4px;
+  }
+
+  .ball {
+    font-size: 0.8rem;
+  }
+
+  .btn-copy {
+    padding: 0 10px;
+  }
+
+  .btn-copy .copy-text {
+    display: none;
+  }
+
+  .btn-pill {
+    padding: 0 14px;
+  }
+
+  .btn-main {
+    font-size: 1rem;
+  }
+}
