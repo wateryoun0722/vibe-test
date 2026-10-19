@@ -1,0 +1,363 @@
+:root {
+  --blue: #185FA5;
+  --blue-dark: #0C447C;
+  --blue-light: #E6F1FB;
+  --sun: #854F0B;
+  --sun-light: #FAEEDA;
+  --rain-light: #EEEDFE;
+  --danger: #A32D2D;
+
+  --bg: #F4F7FB;
+  --card: #FFFFFF;
+  --tile: #F1F4F8;
+  --line: #DFE5EC;
+  --text: #1F2933;
+  --text-sub: #5B6670;
+  --text-muted: #9AA4AE;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+}
+
+.app {
+  max-width: 720px;
+}
+
+/* ① 헤더 */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.title i {
+  color: var(--blue);
+}
+
+.unit-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.unit-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-sub);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.9rem;
+}
+
+.unit-btn[aria-pressed="true"] {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* ② 검색 */
+.search {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  border-radius: 999px;
+  padding: 0 18px;
+  border-color: var(--line);
+}
+
+.search-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-light);
+}
+
+.btn-pill {
+  height: 44px;
+  border-radius: 999px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-main {
+  background: var(--blue);
+  border: none;
+  color: #fff;
+}
+
+.btn-main:hover,
+.btn-main:focus-visible {
+  background: var(--blue-dark);
+  color: #fff;
+}
+
+.btn-main:disabled {
+  background: var(--blue);
+  color: #fff;
+  opacity: 0.7;
+}
+
+.btn-soft {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--blue);
+  padding: 0 14px;
+}
+
+.btn-soft:hover {
+  background: var(--blue-light);
+  color: var(--blue-dark);
+}
+
+.error-msg {
+  min-height: 1.4em;
+  margin: 6px 0 4px 8px;
+  font-size: 0.875rem;
+  color: var(--danger);
+}
+
+.recent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.recent[hidden] {
+  display: none;
+}
+
+.recent-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.recent-list {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text-sub);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.8rem;
+}
+
+.chip:hover {
+  background: var(--blue-light);
+  border-color: var(--blue-light);
+  color: var(--blue-dark);
+}
+
+/* 카드 공통 */
+.weather-area {
+  transition: opacity 0.2s ease;
+}
+
+.weather-area.is-loading {
+  opacity: 0.5;
+}
+
+.card-box {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 16px 18px;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.section-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-sub);
+  margin: 0 0 10px;
+}
+
+/* ③ 현재 날씨 */
+.current {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.icon-circle {
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue-light);
+}
+
+.icon-circle.is-sun { background: var(--sun-light); }
+.icon-circle.is-cloud { background: var(--blue-light); }
+.icon-circle.is-rain { background: var(--rain-light); }
+
+.current-info {
+  min-width: 0;
+}
+
+.city {
+  font-weight: 500;
+}
+
+.city i {
+  color: var(--blue);
+}
+
+.temp {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.summary {
+  color: var(--text-sub);
+  font-size: 0.9rem;
+}
+
+.updated {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ④ 상세 정보 */
+.tile {
+  background: var(--tile);
+  border-radius: 14px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.tile i {
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+
+.tile-label {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+
+.tile strong {
+  font-weight: 500;
+}
+
+/* ⑤ 5일 예보 */
+.forecast {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.day {
+  background: var(--tile);
+  border-radius: 14px;
+  padding: 10px 4px;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.day-name {
+  color: var(--text-sub);
+}
+
+.day img {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto;
+}
+
+.day-max {
+  font-weight: 500;
+}
+
+.day-min {
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+/* 반응형 */
+@media (max-width: 767.98px) {
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .btn-main .btn-text {
+    display: none;
+  }
+
+  .btn-main {
+    padding: 0 16px;
+  }
+
+  .current {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 34px;
+  }
+
+  .updated {
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  .temp {
+    font-size: 3rem;
+  }
+
+  .forecast {
+    gap: 4px;
+  }
+
+  .day {
+    font-size: 0.75rem;
+    padding: 8px 2px;
+  }
+
+  .day img {
+    width: 36px;
+    height: 36px;
+  }
+}
